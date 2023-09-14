@@ -5,35 +5,73 @@ echo '<input type="number" id="numberOfWeeks" name="numberOfWeeks" placeholder="
 /*
 #![forbid(unsafe_code)]
 
-use std::io;
 use std::error::Error;
 
-pub fn get_user_input(prompt: &str) -> Result<i32, Box<dyn Error>> {
-    println!("{}", prompt);
+use teacher::Teacher;
+use crate::user_input::input;
 
-    let mut user_input: String = String::new();
+mod teacher;
+mod user_input;
 
-    io::stdin().read_line(&mut user_input)?;
-
-    let number: i32 = user_input.trim().parse().map_err(|_| "Please enter a valid integer!")?;
-
-    if number <= 0 {
-        return Err(From::from("The number must be greater than 0!"));
-    }
-
-    Ok(number)
+enum Month {
+    January,
+    February,
+    March,
+    April,
+    May,
+    June,
+    July,
+    August,
+    September,
+    October,
+    November,
+    December,
 }
 
-pub fn input(prompt: &str) -> i32 {
-    loop {
-        match get_user_input(prompt) {
-            Ok(count) => {
-                return count;
-            },
-            Err(error) => {
-                println!("Error: {}", error);
-            },
-        };
-    }
+struct Date {
+    day: i32,
+    month: Month,
+    year: i32,
+}
+
+// 13-Sep-2023     staff_code1     staff_code2
+// 14-Sep-2023     staff_code3     staff_code4
+// 15-Sep-2023     staff_code5     staff_code6
+// 16-Sep-2023     staff_code7     staff_code8
+
+// 19-Sep-2023     staff_code9     staff_code10
+// etc...
+
+// list of dates to avoid - teacher training days, bank holidays, mondays
+
+// each person only once per half term (once per timetable) if possible
+
+ fn generate_timetable(teachers: &[Teacher], number_of_weeks: i32, starting_date: Date) -> Vec<Vec<String>> {
+    let mut timetable: Vec<Vec<String>> = Vec::new();
+    let number_of_days: i32 = number_of_weeks * 5;
+
+    // make list of teachers then remove them in pairs when adding to timetable
+
+    // make an empty grid where each row is a week and each column is a day
+    (0..number_of_days).for_each(|_| {
+        // TODO: needs sorting!
+        timetable.push(vec![
+            starting_date.to_string(),
+            staff_code1,
+            staff_code2
+        ]);
+        // timetable.push((1..4).map(|_| String::from("")).collect());
+    });
+}
+
+fn main() -> Result<(), Box<dyn Error>> {
+    let number_of_weeks = input("Enter number of weeks: ");
+
+    let teachers: Vec<Teacher> = teacher::csv_to_teachers("teacher_data.csv")?;
+
+    let timetable: Vec<Vec<String>> = generate_timetable(&teachers, number_of_weeks);
+
+    // println!("{:#?}", timetable);
+    Ok(())
 }
 */
