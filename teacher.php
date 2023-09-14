@@ -4,7 +4,7 @@ class Teacher
 {
     private JobType $jobType;
 
-    public function __construct(private string $firstName, private string $lastName, private string $staffCode, array $daysWorking, JobType $jobType)
+    public function __construct(private string $firstName, private string $lastName, private string $staffCode, JobType $jobType, array $daysWorking)
     {
 
     }
@@ -19,34 +19,24 @@ class Teacher
 
         return $daysWorking;
     }
-}
 
-/*
-pub fn csv_to_teachers(filename: &str) -> Result<Vec<Teacher>, Box<dyn Error>> {
-    let file: File = File::open(filename)?;
-    let mut reader: Reader<File> = Reader::from_reader(file);
-    let mut teachers: Vec<Teacher> = Vec::new();
+    public function csvToTeachers(string $filename): array
+    {
+        $file = fopen($filename, 'r');
+        // read the lines of csv into an array
+        $lines = fgetcsv($file);
 
-    const DAY_NAMES: [&'static str; 5] = [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-    ];
+        $teachers = [];
 
-    for result in reader.deserialize() {
-        let (first_name, last_name, staff_code, working_days): (String, String, String, Vec<i32>) = match result {
-            Ok(record) => record,
-            Err(err) => return Err(Box::new(err)),
-        };
+        while ($line = fgetcsv($file)) {
+            $firstName = $line[0];
+            $lastName = $line[1];
+            $staffCode = $line[2];
+            $jobType = $line[3];
+            $daysWorking = $this->calculateDaysWorking($line[4], $line[5], $line[6], $line[7], $line[8]);
+            $teachers[] = new Teacher($firstName, $lastName, $staffCode, $jobType, $daysWorking);
+        }
 
-        let days_working: Vec<String> = calculate_days_working(&working_days[0..5], &DAY_NAMES);
-
-        let teacher: Teacher = Teacher::new(first_name, last_name, staff_code, days_working);
-        teachers.push(teacher);
+        return $teachers;
     }
-
-    Ok(teachers)
 }
-*/
