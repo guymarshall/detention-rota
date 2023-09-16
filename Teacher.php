@@ -33,7 +33,7 @@ class Teacher
             $lastName = $line[1];
             $staffCode = $line[2];
             $jobType = $line[3];
-            $daysWorking = $this->calculateDaysWorking($line[4], $line[5], $line[6], $line[7], $line[8]);
+            $daysWorking = self::calculateDaysWorking($line[4], $line[5], $line[6], $line[7], $line[8]);
             $teachers[] = new Teacher($firstName, $lastName, $staffCode, $jobType, $daysWorking);
         }
 
