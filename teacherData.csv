@@ -1,0 +1,7 @@
+firstName,lastName,staffCode,workingMonday,workingTuesday,workingWednesday,workingThursday,workingFriday
+John,Doe,JDO,1,1,1,1,1
+Jane,Smith,JSM,1,0,1,0,1
+Bob,Johnson,BJO,0,1,0,1,0
+Steven,Smith,SSM,0,0,0,1,1
+Helen,Mitchell,HMI,1,1,1,0,1
+Susan,Scott,SSC,1,1,0,1,1

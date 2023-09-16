@@ -2,6 +2,13 @@
 
 echo '<input type="number" id="numberOfWeeks" name="numberOfWeeks" placeholder="Enter number of weeks">';
 
+function main()
+{
+    $numberOfWeeks = $_POST['numberOfWeeks'];
+    $teachers = Teacher::csvToTeachers('teacherData.csv');
+    $timetable = Timetable::generateTimetable($teachers, $numberOfWeeks);
+}
+
 /*
 #![forbid(unsafe_code)]
 
@@ -62,16 +69,5 @@ struct Date {
         ]);
         // timetable.push((1..4).map(|_| String::from("")).collect());
     });
-}
-
-fn main() -> Result<(), Box<dyn Error>> {
-    let number_of_weeks = input("Enter number of weeks: ");
-
-    let teachers: Vec<Teacher> = teacher::csv_to_teachers("teacher_data.csv")?;
-
-    let timetable: Vec<Vec<String>> = generate_timetable(&teachers, number_of_weeks);
-
-    // println!("{:#?}", timetable);
-    Ok(())
 }
 */

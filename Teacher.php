@@ -20,7 +20,7 @@ class Teacher
         return $daysWorking;
     }
 
-    public function csvToTeachers(string $filename): array
+    public static function csvToTeachers(string $filename): array
     {
         $file = fopen($filename, 'r');
         // read the lines of csv into an array
