@@ -2,9 +2,7 @@
 
 class Teacher
 {
-    private JobType $jobType;
-
-    public function __construct(private string $firstName, private string $lastName, private string $staffCode, JobType $jobType, array $daysWorking)
+    public function __construct(private string $firstName, private string $lastName, private string $staffCode)
     {
 
     }
