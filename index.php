@@ -6,5 +6,6 @@ function main()
 {
     $numberOfWeeks = $_POST['numberOfWeeks'];
     $teachers = Teacher::csvToTeachers('teacherData.csv');
-    $timetable = DetentionRota::generateRota($teachers, $numberOfWeeks);
+    $startingDate = DateTime::createFromFormat('Y-m-d', '2023-10-01');
+    $timetable = DetentionRota::generateTimetable($teachers, $numberOfWeeks, $startingDate);
 }
